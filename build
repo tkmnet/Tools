@@ -1,0 +1,31 @@
+#! /bin/bash
+
+compilesh="compile.sh"
+exefile=$compilesh
+
+if [ $# == 1 ] ; then
+	exefile=$1.sh
+fi
+
+tryrun() {
+	if [ -e $compilesh -o -e ,$compilesh ] ; then
+		if [ -e ,$exefile ] ; then
+			chmod a+x ./,$exefile
+			./,$exefile
+			exit
+		fi
+		if [ -e $exefile ] ; then
+			chmod a+x ./$exefile
+			./$exefile
+			exit
+		fi
+	fi
+}
+
+while [ "/" != `pwd` ] ; do
+	tryrun
+	cd ..
+done
+tryrun
+
+echo "not exist \"$exefile\"."
