@@ -10,12 +10,12 @@ fi
 tryrun() {
 	if [ -e $compilesh -o -e ,$compilesh ] ; then
 		if [ -e ,$exefile ] ; then
-			chmod a+x ./,$exefile
+			chmod a+x ./,$exefile >/dev/null 2>&1
 			./,$exefile
 			exit
 		fi
 		if [ -e $exefile ] ; then
-			chmod a+x ./$exefile
+			chmod a+x ./$exefile >/dev/null 2>&1
 			./$exefile
 			exit
 		fi
