@@ -1,0 +1,3 @@
+#!/bin/sh
+
+DATETMP=`date +%M | bc` ; gSpeak `date +%H | bc` 時 `if [ $DATETMP -ne 0 ]; then echo "$DATETMP分" "$*" ;fi`

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+wget -q -U Mozilla -O /tmp/google.mp3 "http://translate.google.com/translate_tts?tl=ja&ie=UTF-8&q=$*" 2> /dev/null > /dev/null
+ffmpeg -y -i /tmp/google.mp3 /tmp/google.wav 2> /dev/null > /dev/null
+aplay /tmp/google.wav 2> /dev/null > /dev/null
+rm -f /tmp/google.mp3 2> /dev/null > /dev/null
