@@ -1,26 +1,29 @@
 #! /bin/bash
 
-compilesh="compile.sh"
-exefile=$compilesh
+buildsh="build.sh"
+exefile=$buildsh
 
 if [ $# == 1 ] ; then
 	exefile=$1.sh
 fi
 
 tryrun() {
-	if [ -e $compilesh -o -e ,$compilesh ] ; then
-		if [ -e ,$exefile ] ; then
-			chmod a+x ./,$exefile >/dev/null 2>&1
-			./,$exefile
-			exit
-		fi
-		if [ -e $exefile ] ; then
-			chmod a+x ./$exefile >/dev/null 2>&1
-			./$exefile
-			exit
-		fi
+	if [ -e .$buildsh -o -e $buildsh -o -e ,$buildsh ] ; then
+		for prefix in ',' '' '.' ; do
+			if [ -e $prefix$exefile ] ; then
+				if [ '#!' == `head --bytes=2 $prefix$exefile` ] ; then
+					chmod a+x ./$prefix$exefile >/dev/null 2>&1
+					./$prefix$exefile
+				else
+					sh ./$prefix$exefile
+				fi
+				exit
+			fi
+		done
 	fi
 }
+
+cd `pwd -P`
 
 while [ "/" != `pwd` ] ; do
 	tryrun
