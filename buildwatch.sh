@@ -12,7 +12,7 @@ cp ./build.sh /tmp/build.sh.$$.tmp
 while inotifywait -e $EVENT $WATCHING_FILE; do
 	diff ./build.sh /tmp/build.sh.$$.tmp | wc -l
 	if [ `diff ./build.sh /tmp/build.sh.$$.tmp | wc -l` != 0 ]; then
-		echo '[!] Fail-secure is operated.'
+		echo '[!] Fail-secure stopping was activated.'
 		exit
 	fi
 	sleep $WAIT
