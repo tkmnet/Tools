@@ -5,6 +5,7 @@ if [ $# >= 1 ] ; then
 	exit
 fi
 
+git pull
 git add ./
 git commit -am "$*"
 git push
