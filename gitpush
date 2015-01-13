@@ -1,0 +1,10 @@
+#! /bin/bash
+
+if [ $# >= 1 ] ; then
+	echo Usage: gitpush MSG
+	exit
+fi
+
+git add ./
+git commit -am "$*"
+git push
