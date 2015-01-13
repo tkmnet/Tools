@@ -2,22 +2,27 @@
 # REQUIRE:inotify-tools
 
 WORKDIR=~/Dropbox/AIT_Rescue/ADK_TeX
-WATCHING_FILE=~/Dropbox/AIT_Rescue/ADK_TeX/*.tex
-EVENT=CREATE,MOVE_SELF
-WAIT=3
+WATCHING_FILE=*.tex
 
 cd $WORKDIR
 cp ./build.sh /tmp/build.sh.$$.tmp
+mkdir /tmp/bw.$$.tmp
+cp $WATCHING_FILE /tmp/bw.$$.tmp/
 
-while inotifywait -e $EVENT $WATCHING_FILE; do
-	diff ./build.sh /tmp/build.sh.$$.tmp | wc -l
+while inotifywait -r $WORKDIR; do
+	NEW=0
+	ls $WATCHING_FILE | xargs -I{} diff {} /tmp/bw.$$.tmp/{} || NEW=1
 	if [ `diff ./build.sh /tmp/build.sh.$$.tmp | wc -l` != 0 ]; then
 		echo '[!] Fail-secure stopping was activated.'
 		exit
 	fi
-	sleep $WAIT
-	./build.sh
+	if [ $NEW != 0 -o `ls $WATCHING_FILE | xargs -I{} diff {} /tmp/bw.$$.tmp/{} | wc -l` != 0 ]; then
+		echo '! BUILD'
+		cp $WATCHING_FILE /tmp/bw.$$.tmp/
+		./build.sh
+	fi
 done
 
 rm /tmp/build.sh.$$.tmp
+rm -rf /tmp/bw.$$.tmp/
 
