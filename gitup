@@ -1,10 +1,11 @@
 #! /bin/bash
 
-if [ $# >= 1 ] ; then
+if [ $# == 0 ] ; then
 	echo Usage: gitpush MSG
 	exit
 fi
 
+git pull
 git add ./
 git commit -am "$*"
 git push
