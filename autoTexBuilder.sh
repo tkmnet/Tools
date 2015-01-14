@@ -20,13 +20,21 @@ while inotifywait $WORKDIR; do
 		touch ACTIVATED_FAIL_SECURE
 		break
 	fi
-	MFILES=`diff -q ./ /tmp/atb.$$.tmp/ | sed -E 's/Files \.\///g' | sed -E 's/ and .*$//g' | sed -E 's/^.*: //g' | sed -n '/\.tex$/p'`
+	MFILES=`diff -q ./ /tmp/atb.$$.tmp | sed -E 's/Files \.\///g' | sed -E 's/ and .*$//g' | sed -E 's/^.*: //g' | sed -n '/\.tex$/p'`
 	UPDATEFLAG=0
 	for file in $MFILES ; do
-		UPDATEFLAG=1
-		echo $file
-		rm /tmp/atb.$$.tmp/$file
-		cp $file /tmp/atb.$$.tmp/
+		echo "UPDATED: $file"
+		if [ -d /tmp/atb.$$.tmp/$file ]; then
+			rm -rf /tmp/atb.$$.tmp/$file
+		else
+			rm /tmp/atb.$$.tmp/$file
+		fi
+		if [ -d $file ]; then
+			cp -r $file /tmp/atb.$$.tmp/
+		else
+			UPDATEFLAG=1
+			cp $file /tmp/atb.$$.tmp/
+		fi
 	done
 	if [ $UPDATEFLAG != 0 ]; then
 		echo '! BUILD'
