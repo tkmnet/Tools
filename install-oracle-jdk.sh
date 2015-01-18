@@ -30,15 +30,15 @@ if ! [ -x `which tar||echo /dev/null` -a -x `which gzip||echo /dev/null` ]; then
 	exit
 fi
 
-WGET='wget -q'
+# WGET='wget -q'
 WGET_FILE='wget -q -O'
 WGET_STDOUT='wget -q -O -'
 HEADER_OPTION='--no-check-certificate --no-cookies - --header'
 if ! [ -x `which wget||echo /dev/null` ]; then
 	if [ -x `which curl||echo /dev/null` ]; then
-		WGET='curl –s -O'
+		# WGET='curl –s -O'
 		WGET_FILE='curl –s -o'
-		WGET_STDOUT='curl –s'
+		WGET_STDOUT='curl'
 		HEADER_OPTION='-H'
 	else
 		echo "[!] This script repuire wget or cURL."
