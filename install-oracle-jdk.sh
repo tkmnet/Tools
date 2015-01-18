@@ -34,7 +34,7 @@ fi
 echo 'You must accept the Oracle Binary Code License Agreement for Java SE.'
 echo 'http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 
-echo -n 'Do you accept the License? [y/N] > '
+/bin/echo -n 'Do you accept the License? [y/N] > '
 read answer
 case $answer in
 	y)
