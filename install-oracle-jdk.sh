@@ -44,7 +44,7 @@ echo 'http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 read answer
 case $answer in
 	y)
-		sudo ls >dev/null 2>&1
+		sudo ls >/dev/null 2>&1
 		;;
 	*)
 		echo "Cancelled."
