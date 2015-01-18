@@ -30,6 +30,22 @@ if ! [ -x `which tar||echo /dev/null` -a -x `which gzip||echo /dev/null` ]; then
 	exit
 fi
 
+
+echo 'You must accept the Oracle Binary Code License Agreement for Java SE.'
+echo 'http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+
+echo -n 'Do you accept the License? [y/N] > '
+read answer
+case $answer in
+	y)
+		;;
+	*)
+		echo "Cancelled."
+		exit
+		;;
+esac
+
+
 # WGET='wget -q'
 WGET_FILE='wget -q -O'
 WGET_STDOUT='wget -q -O -'
