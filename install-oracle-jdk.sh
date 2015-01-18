@@ -87,7 +87,7 @@ if [ $OS = 'Linux' ]; then
 
 	echo 'Installing...'
 	echo '=================================================='
-	sh /tmp/java_installer.sh -a "_${DL_JAVA_VER}"
+	sh /tmp/java_installer.sh /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} -a "_${DL_JAVA_VER}"
 	echo '=================================================='
 	rm -f /tmp/java_installer.sh
 fi
