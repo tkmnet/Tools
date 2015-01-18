@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ $# -eq 1 ]; then
+	if [ $1 = '-h' ]; then
+		echo 'Usage: install-oracle-jdk.sh VERSION'
+		exit
+	fi
+fi
 
 DL_JAVA_VER=8
 if [ $# -eq 1 ]; then
