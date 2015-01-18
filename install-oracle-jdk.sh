@@ -36,8 +36,8 @@ WGET_STDOUT='wget -q -O -'
 HEADER_OPTION='--no-check-certificate --no-cookies - --header'
 if ! [ -x `which wget||echo /dev/null` ]; then
 	if [ -x `which curl||echo /dev/null` ]; then
-		# WGET='curl –s -O'
-		WGET_FILE='curl –s -o'
+		# WGET='curl -s -O'
+		WGET_FILE='curl -s -o'
 		WGET_STDOUT='curl'
 		HEADER_OPTION='-H'
 	else
