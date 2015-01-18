@@ -38,7 +38,7 @@ if ! [ -x `which wget||echo /dev/null` ]; then
 	if [ -x `which curl||echo /dev/null` ]; then
 		# WGET='curl -s -O'
 		WGET_FILE='curl -s -o'
-		WGET_STDOUT='curl'
+		WGET_STDOUT='curl -s'
 		HEADER_OPTION='-L -H'
 	else
 		echo "[!] This script repuire wget or cURL."
