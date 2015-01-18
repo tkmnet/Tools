@@ -104,6 +104,8 @@ if ! [ -x `which javac||echo @` ]; then
 		echo "[!] Install Failed."
 		exit
 	fi
+else
+	java -version
 fi
 
 rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
