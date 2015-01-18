@@ -99,14 +99,17 @@ if [ $OS = 'Darwin' ]; then
 	hdiutil detach /Volumes/JDK* >/dev/null 2>&1
 fi
 
+
 if ! [ -x `which javac||echo @` ]; then
+	echo "[!] Install Failed."
+else
 	if [ `javac -version 2>&1 | grep -o "javac 1.${DL_JAVA_VER}.*" | wc -l` != 1 ]; then
 		echo "[!] Install Failed."
 		exit
+	else
+		java -version
+		echo 'Done.'
 	fi
-else
-	java -version
 fi
 
 rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
-echo 'Done.'
