@@ -2,7 +2,7 @@
 
 if [ $# -eq 1 ]; then
 	if [ $1 = '-h' ]; then
-		echo 'Usage: install-oracle-jdk.sh VERSION'
+		echo 'Usage: ./install-oracle-jdk.sh VERSION'
 		exit
 	fi
 fi
