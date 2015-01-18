@@ -70,10 +70,14 @@ fi
 
 
 echo "Downloading... (JDK)"
-DLSTAT=0
-$WGET_FILE /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} ${HEADER_OPTION} "Cookie: oraclelicense=accept-securebackup-cookie" `$WGET_STDOUT http://www.oracle.com/technetwork/java/javase/downloads/index.html | grep -o "\/technetwork\/java/\javase\/downloads\/jdk${DL_JAVA_VER}-downloads-[0-9]*\.html" | head -1 | xargs -I@ echo "http://www.oracle.com"@ | xargs $WGET_STDOUT 2>/dev/null | grep -o "http.*jdk-${DL_JAVA_VER}u[0-9]*-${FILE_SUFFIX}" | head -1` && DLSTAT=1 || DLSTAT=0
+$WGET_FILE /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} ${HEADER_OPTION} "Cookie: oraclelicense=accept-securebackup-cookie" `$WGET_STDOUT http://www.oracle.com/technetwork/java/javase/downloads/index.html | grep -o "\/technetwork\/java/\javase\/downloads\/jdk${DL_JAVA_VER}-downloads-[0-9]*\.html" | head -1 | xargs -I@ echo "http://www.oracle.com"@ | xargs $WGET_STDOUT 2>/dev/null | grep -o "http.*jdk-${DL_JAVA_VER}u[0-9]*-${FILE_SUFFIX}" | head -1`
 
-if [ $DLSTAT -eq 0 -o ! -e "/tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}" ]; then
+DLSTAT=$?
+if [ $DLSTAT -eq 4 ]; then
+	DLSTAT=0
+fi
+
+if [ $DLSTAT -ne 0 ! -e "/tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}" ]; then
 	echo '[!] Download Failed.';
 	rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
 	exit
@@ -82,10 +86,10 @@ fi
 
 if [ $OS = 'Linux' ]; then
 	echo "Downloading... (Install script)"
-	DLSTAT=0
-	$WGET_FILE /tmp/java_installer.sh 'https://github.com/AIT-Rescue/AIT-Rescue/releases/download/beta/java_installer.sh' && DLSTAT=1 || DLSTAT=0
+	DLSTAT=1
+	$WGET_FILE /tmp/java_installer.sh 'https://github.com/AIT-Rescue/AIT-Rescue/releases/download/beta/java_installer.sh' && DLSTAT=0 || DLSTAT=1
 
-	if [ $DLSTAT -eq 0 -o ! -e "/tmp/java_installer.sh" ]; then
+	if [ $DLSTAT -ne 0 -o ! -e "/tmp/java_installer.sh" ]; then
 		echo '[!] Download Failed.';
 		rm -f /tmp/java_installer.sh
 		exit
@@ -93,7 +97,8 @@ if [ $OS = 'Linux' ]; then
 
 	echo 'Installing...'
 	echo '=================================================='
-	sh /tmp/java_installer.sh /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} -a "_${DL_JAVA_VER}"
+	chmod a+x /tmp/java_installer.sh
+	/tmp/java_installer.sh /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} -a "_${DL_JAVA_VER}"
 	echo '=================================================='
 	rm -f /tmp/java_installer.sh
 fi
@@ -101,6 +106,7 @@ fi
 if [ $OS = 'Darwin' ]; then
 	hdiutil detach /Volumes/JDK* >/dev/null 2>&1
 	hdiutil attach /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} >/dev/null 2>&1
+	echo 'Installing...'
 	find /Volumes/JDK* -type f -name 'JDK*.pkg' 2>/dev/null | sed -E 's/ /\\ /g' | xargs open -W
 	hdiutil detach /Volumes/JDK* >/dev/null 2>&1
 fi
