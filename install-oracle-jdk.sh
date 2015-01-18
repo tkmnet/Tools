@@ -36,9 +36,9 @@ WGET_STDOUT='wget -q -O -'
 HEADER_OPTION='--no-check-certificate --no-cookies - --header'
 if ! [ -x `which wget||echo /dev/null` ]; then
 	if [ -x `which curl||echo /dev/null` ]; then
-		WGET='curl -O'
-		WGET_FILE='curl -o'
-		WGET_STDOUT='curl'
+		WGET='curl –silent -O'
+		WGET_FILE='curl –silent -o'
+		WGET_STDOUT='curl –silent'
 		HEADER_OPTION='-H'
 	else
 		echo "[!] This script repuire wget or cURL."
@@ -51,7 +51,7 @@ echo "Downloading... (JDK)"
 DLSTAT=0
 $WGET_FILE /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} ${HEADER_OPTION} "Cookie: oraclelicense=accept-securebackup-cookie" `$WGET_STDOUT http://www.oracle.com/technetwork/java/javase/downloads/index.html | grep -o "\/technetwork\/java/\javase\/downloads\/jdk${DL_JAVA_VER}-downloads-[0-9]*\.html" | head -1 | xargs -I@ echo "http://www.oracle.com"@ | xargs $WGET_STDOUT 2>/dev/null | grep -o "http.*jdk-${DL_JAVA_VER}u[0-9]*-${FILE_SUFFIX}" | head -1` && DLSTAT=1 || DLSTAT=0
 
-if [ $DLSTAT -eq 0 -o -e "/tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}" ]; then
+if [ $DLSTAT -eq 0 -o ! -e "/tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}" ]; then
 	echo '[!] Download Failed.';
 	rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
 	exit
@@ -63,7 +63,7 @@ if [ $OS = 'Linux' ]; then
 	DLSTAT=0
 	$WGET_FILE /tmp/java_installer.sh 'https://github.com/AIT-Rescue/AIT-Rescue/releases/download/beta/java_installer.sh' && DLSTAT=1 || DLSTAT=0
 
-	if [ $DLSTAT -eq 0 -o -e "/tmp/java_installer.sh" ]; then
+	if [ $DLSTAT -eq 0 -o ! -e "/tmp/java_installer.sh" ]; then
 		echo '[!] Download Failed.';
 		rm -f /tmp/java_installer.sh
 		exit
