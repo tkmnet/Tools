@@ -79,7 +79,7 @@ fi
 if [ $OS = 'Darwin' ]; then
 	hdiutil detach /Volumes/JDK* >/dev/null 2>&1
 	hdiutil attach /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} >/dev/null 2>&1
-	open -W `find /Volumes/JDK* -type f -name 'JDK*.pkg' 2>/dev/null | sed -E 's/ /\\ /g'`
+	find /Volumes/JDK* -type f -name 'JDK*.pkg' 2>/dev/null | sed -E 's/ /\\ /g' | xargs open -W
 	hdiutil detach /Volumes/JDK* >/dev/null 2>&1
 fi
 
