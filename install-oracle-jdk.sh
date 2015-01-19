@@ -99,7 +99,7 @@ if [ $OS = 'Linux' ]; then
 	echo 'Installing...'
 	echo '=================================================='
 	chmod a+x /tmp/java_installer.sh
-	/tmp/java_installer.sh /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
+	/tmp/java_installer.sh -a _${DL_JAVA_VER} /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
 	echo '=================================================='
 	rm -f /tmp/java_installer.sh
 fi
