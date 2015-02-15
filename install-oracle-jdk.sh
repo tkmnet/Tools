@@ -83,7 +83,7 @@ fi
 
 if [ $OS = 'Linux' ]; then
 	echo "Downloading... (Installer)"
-	$WGET_FILE /tmp/expand-oracle-jdk.sh
+	$WGET_FILE /tmp/expand-oracle-jdk.sh https://raw.githubusercontent.com/tkmnet/Tools/master/expand-oracle-jdk.sh
 
 	DLSTAT=$?
 	if [ $DLSTAT -ne 0 -o ! -e "/tmp/expand-oracle-jdk.sh" ]; then
@@ -92,6 +92,8 @@ if [ $OS = 'Linux' ]; then
 		exit
 	fi
 	echo 'Installing...'
+	sudo sh /tmp/expand-oracle-jdk.sh /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
+	rm -f /tmp/expand-oracle-jdk.sh
 	rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
 fi
 
@@ -101,7 +103,7 @@ if [ $OS = 'Darwin' ]; then
 	echo 'Installing...'
 	find /Volumes/JDK* -type f -name 'JDK*.pkg' 2>/dev/null | sed -E 's/ /\\ /g' | xargs open -W
 	hdiutil detach /Volumes/JDK* >/dev/null 2>&1
-	rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX} >/dev/null 2>&1
+	rm -f /tmp/jdk${DL_JAVA_VER}-${FILE_SUFFIX}
 fi
 
 
