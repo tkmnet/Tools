@@ -65,7 +65,7 @@ fi
 
 
 sed 's/<[^>]*>/ /g' record.raw | sed '/^\s*$/d' | sed 's/^\s*//g' | sed 's/\r/ /g' | tr -d '\n' | sed 's/^.*共通教育科目/共通教育科目\n/' | sed 's/専門教育科目/\n専門教育科目\n/' | sed 's/総合教育科目/\n総合教育科目\n/' | sed 's/教職教育科目/\n教職教育科目\n/' | sed 's/処理年月日.*$/\n/' | sed 's/&nbsp;/\n/g' | sed '/^\s*$/d' | sed 's/定期試験.*$//' | sed 's/\s/ /g' | sed 's/ /_/g' | sed -E 's/(【|】)//g' | sed 's/__$/__不明/g' > record.tmp
-#rm record.raw
+rm record.raw
 
 cat record.tmp | sed 's/$/@/g' | tr -d '\n' | sed 's/教職教育科目@.*$//' > recordA.tmp
 rm record.tmp
