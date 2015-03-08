@@ -19,6 +19,7 @@ cd /usr/local/aipo/bin
 sudo sed -iE 's/^sh /bash /' installer.sh
 sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
+sudo sed -iE 's%configure%configure CFLAGS="-O1"%' utf8/installer.sh
 
 sudo sh installer.sh
 
