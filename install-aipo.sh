@@ -21,7 +21,11 @@ sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
 
 sudo mv utf8/installer.sh utf8/installer.sh.tmp
-sudo sed -E 's%^(echo .*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
+sudo sed -E 's%^(echo user:.*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
+sudo sed -E 's%^(echo pass:.*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
+sudo sed -E 's%^(echo directory:.*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
+sudo sed -E 's%^(echo port:.*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
+sudo sed -E 's%^(echo "Aipo URL:.*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
 sudo rm -f utf8/installer.sh.tmp
 
 sudo sh installer.sh
