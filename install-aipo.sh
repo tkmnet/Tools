@@ -3,16 +3,6 @@
 cd /usr/local
 sudo cat /dev/null
 
-# if ! [ -x `which java||echo @` ]; then
-# 	echo "[!] This script repuire java."
-# 	cd /tmp
-# 	wget https://raw.githubusercontent.com/tkmnet/Tools/master/install-oracle-jdk.sh
-# 	sh install-oracle-jdk.sh
-# 	rm -f install-oracle-jdk.sh
-# 	sh $0
-# 	exit
-# fi
-
 sudo userdel -r aipo_postgres
 sudo rm -rf /usr/local/aipo
 
@@ -25,11 +15,10 @@ sudo rm -rf aipo7020aja_linux
 sudo apt-get update
 sudo apt-get -y install build-essential zlib1g-dev libreadline-gplv2-dev nmap
 
-cd /usr/local/aipo/bin
+sudo cd /usr/local/aipo/bin
 sudo sed -iE 's/^sh /bash /' installer.sh
 sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
-# sudo sed -iE 's%^tar.*jre_x64.*$%ln -s /usr/lib/jvm/java-8-oracle/jre /usr/local/aipo/jre%' utf8/installer.sh
 
 sudo mv utf8/installer.sh utf8/installer.sh.tmp
 sudo sed -E 's%^(echo .*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh.tmp > utf8/installer.sh
