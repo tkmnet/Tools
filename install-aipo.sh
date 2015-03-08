@@ -30,3 +30,9 @@ sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
 
 sudo sh installer.sh
 
+sudo sed -iE 's%/etc/sysconfig/network-scripts/ifcfg-${netitf}%/etc/network/interfaces%' startup.sh
+sudo sed -iE 's%ifconfig ${netitf}%ifconfig eth0%' startup.sh
+
+sudo wget -O /etc/init.d/aipo https://gist.githubusercontent.com/tkmnet/cb3dfd43393befb88b13/raw/05f9b148de44142d347aed007e9fc002dc1c91e7/aipo
+sudo chmod +x /etc/init.d/aipo
+sudo update-rc.d aipo defaults 90 9
