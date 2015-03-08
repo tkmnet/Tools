@@ -7,15 +7,15 @@ sudo userdel -r aipo_postgres
 sudo rm -rf /usr/local/aipo
 
 sudo wget -O aipo7020aja_linux64.tar.gz 'http://sourceforge.jp/frs/redir.php?m=iij&f=/aipo/60038/aipo7020aja_linux64.tar.gz'
-sudo tar xzf aipo7020aja_linux64.tar.gz
+sudo tar xvzf aipo7020aja_linux64.tar.gz
 sudo rm -f aipo7020aja_linux64.tar.gz
-sudo tar xzf aipo7020aja_linux/aipo7020.tar.gz
+sudo tar xvzf aipo7020aja_linux/aipo7020.tar.gz
 sudo rm -rf aipo7020aja_linux
 
 sudo apt-get update
 sudo apt-get -y install build-essential zlib1g-dev libreadline-gplv2-dev nmap
 
-sudo cd /usr/local/aipo/bin
+cd /usr/local/aipo/bin
 sudo sed -iE 's/^sh /bash /' installer.sh
 sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
