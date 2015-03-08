@@ -28,7 +28,7 @@ sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
 # sudo sed -iE 's%^tar.*jre_x64.*$%ln -s /usr/lib/jvm/java-8-oracle/jre /usr/local/aipo/jre%' utf8/installer.sh
 
-sudo sed -iE 's%^(echo .*)$%\1 >>/tmp/aipo.log%' installer.sh
+sudo sed -E 's%^(echo .*)%\1 >>/tmp/aipo.log%g' utf8/installer.sh > utf8/installer.sh
 
 sudo sh installer.sh
 
