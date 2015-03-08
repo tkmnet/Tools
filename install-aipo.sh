@@ -28,7 +28,11 @@ sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
 # sudo sed -iE 's%^tar.*jre_x64.*$%ln -s /usr/lib/jvm/java-8-oracle/jre /usr/local/aipo/jre%' utf8/installer.sh
 
+sudo sed -iE 's%^(echo .*)$%\1 >>/tmp/aipo.log%' installer.sh
+
 sudo sh installer.sh
+
+sudo tail -5 /tmp/aipo.log > /tmp/aipo.log
 
 sudo sed -iE 's%/etc/sysconfig/network-scripts/ifcfg-${netitf}%/etc/network/interfaces%' startup.sh
 sudo sed -iE 's%ifconfig ${netitf}%ifconfig eth0%' startup.sh
@@ -36,3 +40,9 @@ sudo sed -iE 's%ifconfig ${netitf}%ifconfig eth0%' startup.sh
 sudo wget -O /etc/init.d/aipo https://gist.githubusercontent.com/tkmnet/cb3dfd43393befb88b13/raw/05f9b148de44142d347aed007e9fc002dc1c91e7/aipo
 sudo chmod +x /etc/init.d/aipo
 sudo update-rc.d aipo defaults 90 9
+
+sudo /etc/init.d/aipo stop
+sudo /etc/init.d/aipo start
+
+sudo echo /tmp/aipo.log
+echo
