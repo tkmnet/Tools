@@ -13,6 +13,9 @@ sudo cat /dev/null
 # 	exit
 # fi
 
+sudo userdel -r aipo_postgres
+sudo rm -rf /usr/local/aipo
+
 sudo wget -O aipo7020aja_linux64.tar.gz 'http://sourceforge.jp/frs/redir.php?m=iij&f=/aipo/60038/aipo7020aja_linux64.tar.gz'
 sudo tar xzf aipo7020aja_linux64.tar.gz
 sudo rm -f aipo7020aja_linux64.tar.gz
