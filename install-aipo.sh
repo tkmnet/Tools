@@ -20,8 +20,7 @@ sudo sed -iE 's/^sh /bash /' installer.sh
 sudo sed -iE 's%^rpm.*$%dpkg -l > ${script_path}/bin/rpmlist%' utf8/installer.sh
 sudo sed -iE 's%^tmp_str.*rpmlist.*$%tmp_str="THROW"%' utf8/installer.sh
 
-alias gcc="gcc-4.7"
-sudo sed -iE 's%configure%configure CC="gcc-4.7"%' utf8/installer.sh
+sudo sed -iE 's%gcc -m64%gcc-4.7 -m64%' utf8/installer.sh
 
 sudo sh installer.sh
 
