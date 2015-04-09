@@ -23,7 +23,7 @@ sudo mv /tmp/idea/$IDEA /usr/lib/idea/
 sudo update-alternatives --install "/usr/bin/idea" "idea" "/usr/lib/idea/${IDEA}/bin/idea.sh" 1
 sudo update-alternatives --set idea "/usr/lib/idea/${IDEA}/bin/idea.sh"
 
-rm -f idea.tar.gz
+rm -rf /tmp/idea
 
 
 exit
