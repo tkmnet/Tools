@@ -14,7 +14,7 @@ echo $IDEA
 cd ${IDEA}/bin
 mv idea.sh idea.sh.org
 echo '#!/bin/sh' > idea.sh
-echo 'export JAVA_HOME=`which javac | xargs readlink | xargs readlink | xargs dirname | xargs dirname`' >> idea.sh
+echo 'export JAVA_HOME=`which javac | xargs readlink -f | xargs dirname | xargs dirname`' >> idea.sh
 cat idea.sh.org >> idea.sh
 chmod a+x idea.sh
 
