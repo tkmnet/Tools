@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export JAVA_HOME_CMD="`which javac | xargs readlink | xargs dirname`/java_home"
+export JAVA_HOME="`${JAVA_HOME_CMD}`"
+/Applications/IntelliJ\ IDEA\ 14\ CE.app/Contents/MacOS/idea
