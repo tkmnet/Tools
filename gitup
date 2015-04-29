@@ -1,8 +1,16 @@
 #! /bin/bash
 
+gitStatus()
+{
+	echo ' - - - - - - - - - - - - - - - - - - - - '
+	git status
+	return 0
+}
+
 git pull
 
 if [ $# == 0 ] ; then
+	gitStatus
 	exit
 fi
 
@@ -10,5 +18,4 @@ git pull
 git add ./
 git commit -am "$*"
 git push
-echo ' - - - - - - - - - - - - - - - - - - - - '
-git status
+gitStatus
