@@ -1,0 +1,5 @@
+#!/bin/bash
+
+HAHII="∥￣口￣∥　はひー"
+
+tw -yes "${HAHII} (`date +%H:%M:%S`)" > /dev/null
