@@ -2,4 +2,14 @@
 
 HAHII="∥￣口￣∥　はひー"
 
-tw -yes "${HAHII} (`date +%H:%M:%S`)" > /dev/null
+if [ ! -e ~/.akari_hahii.tmp ]; then
+		echo 1 > ~/.akari_hahii.tmp
+fi
+
+COUNT=`cat ~/.akari_hahii.tmp`
+
+
+tw -yes "${HAHII} (${COUNT}回目)" > /dev/null
+#tw -yes "${HAHII} (`date +%H:%M:%S`)" > /dev/null
+
+echo "${COUNT} +1" | bc > ~/.akari_hahii.tmp
