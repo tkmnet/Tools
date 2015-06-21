@@ -7,6 +7,17 @@ gitStatus()
 	return 0
 }
 
+ENV_SSH=1
+
+ssh-add -l
+if [ $? == 2 ] ; then
+	ENV_SSH=0
+	eval `ssh-agent -s`
+	ssh-add
+elif [ $? == 1 ] ; then
+	ssh-add
+fi
+
 git pull
 
 if [ $# == 0 ] ; then
@@ -19,3 +30,7 @@ git add ./
 git commit -am "$*"
 git push
 gitStatus
+
+if [ $ENV_SSH == 0 ] ; then
+	eval `ssh-agent -sk`
+fi
