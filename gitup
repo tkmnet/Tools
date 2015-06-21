@@ -10,11 +10,12 @@ gitStatus()
 ENV_SSH=1
 
 ssh-add -l
-if [ $? == 2 ] ; then
+SSHL=$?
+if [ $SSHL == 2 ] ; then
 	ENV_SSH=0
 	eval `ssh-agent -s`
 	ssh-add
-elif [ $? == 1 ] ; then
+elif [ $SSHL == 1 ] ; then
 	ssh-add
 fi
 
