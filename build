@@ -2,13 +2,23 @@
 
 buildsh="build.sh"
 exefile=$buildsh
+listmode=0
 
-if [ $# == 1 ] ; then
+if [ $# -eq 1 ] ; then
 	exefile=$1.sh
+fi
+
+if [ "$1" == '-l' ] ; then
+	listmode=1
 fi
 
 tryrun() {
 	if [ -e .$buildsh -o -e $buildsh -o -e ,$buildsh ] ; then
+		if [ $listmode -eq 1 ] ; then
+			find -maxdepth 1 -type f -name "*\.sh" | sed -e "s%^\./%%" | sed -e 's%\.sh$%%' | sed -e 's%^,%%' | sed -e 's%^\.%%'
+			exit
+		fi
+
 		for prefix in ',' '' '.' ; do
 			if [ -e $prefix$exefile ] ; then
 				if [ '#!' == `head --bytes=2 $prefix$exefile` ] ; then
@@ -20,6 +30,7 @@ tryrun() {
 				exit
 			fi
 		done
+		exit
 	fi
 }
 
@@ -30,5 +41,10 @@ while [ "/" != `pwd` ] ; do
 	cd ..
 done
 tryrun
+
+if [ $listmode -eq 1 ] ; then
+	echo "not exist \"$buildsh\"."
+	exit
+fi
 
 echo "not exist \"$exefile\"."
