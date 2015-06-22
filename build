@@ -43,7 +43,6 @@ done
 tryrun
 
 if [ $listmode -eq 1 ] ; then
-	echo "not exist \"$buildsh\"."
 	exit
 fi
 
