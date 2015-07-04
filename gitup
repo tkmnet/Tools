@@ -3,7 +3,11 @@
 gitStatus()
 {
 	echo ' - - - - - - - - - - - - - - - - - - - - '
-	git status
+	if [[ `git status` =~ "nothing to commit, working directory clean" ]]; then
+		echo -e "[ \e[32mOK\e[m ]"
+	else
+		echo -e "[ \e[31mNG\e[m ]"
+	fi
 	return 0
 }
 
@@ -30,8 +34,9 @@ git pull
 git add ./
 git commit -am "$*"
 git push
-gitStatus
 
 if [ $ENV_SSH == 0 ] ; then
 	eval `ssh-agent -sk`
 fi
+
+gitStatus
