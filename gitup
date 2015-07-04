@@ -2,8 +2,9 @@
 
 gitStatus()
 {
-	echo ' - - - - - - - - - - - - - - - - - - - - '
-	printf "%.echo `$COLUMNS | awk '{print int($1 / 2 - 3)}'`s test" "                                                                                                    "
+	echo
+	SPACE=`tput cols | awk '{print int($1 / 2 - 3)}'`
+	printf "%.${SPACE}s" "                                                                                                    "
 	if [[ `git status` =~ "nothing to commit, working directory clean" ]]; then
 		echo -e "[ \e[32mOK\e[m ]"
 	else
