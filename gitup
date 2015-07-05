@@ -2,7 +2,6 @@
 
 gitStatus()
 {
-	echo
 	if [[ `git status` =~ "nothing to commit, working directory clean" ]]; then
 		echo -e "\e[42m"
 	else
