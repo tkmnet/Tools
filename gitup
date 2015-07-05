@@ -3,13 +3,14 @@
 gitStatus()
 {
 	echo
-	SPACE=`tput cols | awk '{print int($1 / 2 - 3)}'`
-	printf "%.${SPACE}s" "                                                                                                    "
 	if [[ `git status` =~ "nothing to commit, working directory clean" ]]; then
-		echo -e "[ \e[32mOK\e[m ]"
+		echo -e "\e[42m"
 	else
-		echo -e "[ \e[31mNG\e[m ]"
+		echo -e "\e[41m"
 	fi
+	SPACE=`tput cols`
+	printf "%.${SPACE}s" "                                                                                                                                                                                                                                                                                                            "
+	echo -e "\e[m"
 	return 0
 }
 
