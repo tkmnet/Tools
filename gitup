@@ -3,9 +3,9 @@
 gitStatus()
 {
 	if [[ `git status` =~ "nothing to commit, working directory clean" ]]; then
-		echo -e "\e[42m"
+		echo -en "\e[42m "
 	else
-		echo -e "\e[41m"
+		echo -en "\e[41m "
 	fi
 	echo -e "\e[m"
 	return 0
