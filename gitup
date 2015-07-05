@@ -8,8 +8,6 @@ gitStatus()
 	else
 		echo -e "\e[41m"
 	fi
-	SPACE=`tput cols`
-	printf "%.${SPACE}s" "                                                                                                                                                                                                                                                                                                            "
 	echo -e "\e[m"
 	return 0
 }
