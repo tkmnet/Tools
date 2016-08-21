@@ -2,7 +2,7 @@
 
 gitStatus()
 {
-	if [[ `git status` =~ "nothing to commit, working directory clean" -o `git status` =~ "nothing to commit, working tree clean" ]]; then
+	if [[ `git status` =~ "nothing to commit, working directory clean" ]] || [[ `git status` =~ "nothing to commit, working tree clean" ]]; then
 		echo -en "\e[42m "
 	else
 		echo -en "\e[41m "
