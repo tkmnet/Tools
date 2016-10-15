@@ -37,6 +37,8 @@ sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/${JDKD
 sudo update-alternatives --set javac "/usr/lib/jvm/${JDKDIR}/bin/javac"
 sudo update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/${JDKDIR}/bin/jar" 1
 sudo update-alternatives --set jar "/usr/lib/jvm/${JDKDIR}/bin/jar"
+sudo update-alternatives --install "/usr/bin/jdeps" "jdeps" "/usr/lib/jvm/${JDKDIR}/bin/jdeps" 1
+sudo update-alternatives --set jdeps "/usr/lib/jvm/${JDKDIR}/bin/jdeps"
 sudo rm -rf /tmp/jdk.$$.tmp
 
 
