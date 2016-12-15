@@ -1,0 +1,3 @@
+#!/bin/sh
+
+convert $1 \( +clone -alpha opaque -fill White -colorize 100% \) +swap -geometry +0+0 -compose Over -composite  -alpha off $1
