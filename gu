@@ -39,6 +39,10 @@ elif [ $SSHL == 1 ] ; then
 	ssh-add
 fi
 
+while [ "/" != `pwd` -a ! -d .git ] ; do
+	cd ..
+done
+
 git pull
 
 if [ $# == 0 ] ; then
