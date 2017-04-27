@@ -1,0 +1,60 @@
+#! /bin/bash
+
+makeMessage()
+{
+    M="$*"
+
+    M=`echo "$M " | sed -E 's/^u /Update: /'`
+    M=`echo "$M " | sed -E 's/^a /Add: /'`
+    M=`echo "$M " | sed -E 's/^f /Fix: /'`
+    M=`echo "$M " | sed -E 's/^r /Remove: /'`
+    M=`echo "$M " | sed -E 's/^ch /Change: /'`
+    M=`echo "$M " | sed -E 's/^cl /Clean: /'`
+
+    M=`echo $M | sed -E 's/ +$//'`
+    M=`echo $M | sed -E 's/:$//'`
+    echo $M
+}
+
+gitStatus()
+{
+	if [[ `git status` =~ "nothing to commit, working directory clean" ]] || [[ `git status` =~ "nothing to commit, working tree clean" ]]; then
+		echo -en "\e[42m "
+	else
+		echo -en "\e[41m "
+	fi
+	echo -e "\e[m"
+	return 0
+}
+
+ENV_SSH=1
+
+ssh-add -l
+SSHL=$?
+if [ $SSHL == 2 ] ; then
+	ENV_SSH=0
+	eval `ssh-agent -s`
+	ssh-add
+elif [ $SSHL == 1 ] ; then
+	ssh-add
+fi
+
+git pull
+
+if [ $# == 0 ] ; then
+	gitStatus
+	exit
+fi
+
+MSG=`makeMessage "$*"`
+
+git pull
+git add ./
+git commit -am "${MSG}"
+git push
+
+if [ $ENV_SSH == 0 ] ; then
+	eval `ssh-agent -sk`
+fi
+
+gitStatus
