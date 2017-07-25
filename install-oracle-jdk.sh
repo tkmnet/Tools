@@ -55,7 +55,7 @@ esac
 
 # WGET='wget -q'
 WGET_FILE='wget -nv -O'
-WGET_STDOUT='wget -q -nv -O -'
+WGET_STDOUT='wget -q -O -'
 HEADER_OPTION='--no-check-certificate --no-cookies --header'
 if ! [ -x `which wget||echo /dev/null` ]; then
 	if [ -x `which curl||echo /dev/null` ]; then
