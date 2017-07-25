@@ -54,7 +54,7 @@ esac
 
 
 # WGET='wget -q'
-WGET_FILE='wget -nv -O'
+WGET_FILE='wget -q -O'
 WGET_STDOUT='wget -q -O -'
 HEADER_OPTION='--no-check-certificate --no-cookies --header'
 if ! [ -x `which wget||echo /dev/null` ]; then
