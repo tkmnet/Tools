@@ -37,7 +37,7 @@ if ! [ -x `which tar||echo /dev/null` -a -x `which gzip||echo /dev/null` ]; then
 fi
 
 
-if [ $LICENSE_ACCEPTED != 'YES' ]; then
+if [ ! $LICENSE_ACCEPTED = 'YES' ]; then
 	echo 'You must accept the Oracle Binary Code License Agreement for Java SE.'
 	echo 'http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 
