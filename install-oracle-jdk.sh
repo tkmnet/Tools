@@ -56,9 +56,9 @@ fi
 
 
 # WGET='wget -q'
-WGET_FILE='wget -q -O'
-WGET_STDOUT='wget -q -O -'
-HEADER_OPTION='--no-check-certificate --no-cookies --header'
+WGET_FILE='wget -q -O --no-check-certificate'
+WGET_STDOUT='wget -q -O - --no-check-certificate'
+HEADER_OPTION=' --no-cookies --header'
 if ! [ -x `which wget||echo /dev/null` ]; then
 	if [ -x `which curl||echo /dev/null` ]; then
 		# WGET='curl -s -O'
