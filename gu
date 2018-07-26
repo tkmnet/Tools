@@ -56,6 +56,8 @@ git pull
 git add ./
 git commit -am "${MSG}"
 git push
+git pull
+git push
 
 if [ $ENV_SSH == 0 ] ; then
 	eval `ssh-agent -sk`
